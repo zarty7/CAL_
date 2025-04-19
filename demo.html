@@ -9,26 +9,39 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
+         /* 为内容区域添加半透明背景 */
+         .upload-section, #result {
+            background-color: rgba(255, 255, 255, 0.9); 
+        }
+
+        /* 虚线框，并且使文案居中 */
         .upload-section {
-            border: 2px dashed #ccc;
+            border: 2px dashed #000000;
             padding: 20px;
             text-align: center;
             margin-bottom: 20px;
         }
 
+        /* 图片预览 */
         #preview {
             max-width: 500px;
             margin: 20px auto;
             display: none;
         }
 
+        
         #preview img {
             max-width: 100%;
             max-height: 400px;
         }
 
+        /* 结果返回框 */
         #result {
             margin-top: 20px;
             padding: 15px;
@@ -36,12 +49,14 @@
             border-radius: 5px;
         }
 
+        /* 识别结果分界线 */
         .dish-item {
             margin-bottom: 15px;
             padding: 10px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #000000;
         }
 
+        /* 开始识别按钮 */
         button {
             background-color: #4CAF50;
             color: white;
@@ -52,10 +67,12 @@
             margin-top: 10px;
         }
 
+        /* 鼠标悬停在开始识别时变色 */
         button:hover {
-            background-color: #45a049;
+            background-color: #6e2bff;
         }
 
+        /* 加载文字（实际好像没看见） */
         .loading {
             display: none;
             margin: 20px;
@@ -108,11 +125,7 @@
 
         // 新增图片处理函数
         async function processImage(file) {
-            // 新增文件大小验证（结合现有MAX_SIZE常量）
-            // if (file.size > MAX_SIZE) {
-            //     throw new Error(`文件大小超过${MAX_SIZE/(1024*1024)}MB限制`);
-            // }
-
+            
             // 读取图片
             const img = await loadImage(file);
             
@@ -173,14 +186,8 @@
         // 转换图片格式并压缩
         async function convertImage(canvas) {
             return new Promise((resolve, reject) => {
-            // const format = document.querySelector('input[name="format"]:checked').value;
-            // let mimeType = 'image/jpeg'; // 默认设为jpg
-            // const mimeType = 'image/jpeg';
-            let quality = 0.9;
+                let quality = 0.9;
 
-            // 处理格式映射
-            // if (format === 'png') mimeType = 'image/png';
-            // if (format === 'bmp') mimeType = 'image/bmp';
 
             // 填充白色背景（关键修复）
             const applyBackgroundAndConvert = () => {
@@ -194,11 +201,6 @@
                     
                     tempCanvas.toBlob(blob => {
                         if (!blob) return reject(new Error('图片转换失败'));
-                        
-                        console.log('最终Blob:', { 
-                            type: blob.type, 
-                            size: (blob.size/1024).toFixed(1)+'KB' 
-                        });
 
                         if (blob.size > MAX_SIZE && quality > 0.3) {
                             quality -= 0.1;
@@ -206,7 +208,11 @@
                         } else if (blob.size > MAX_SIZE) {
                             reject(new Error('图片过大，请尝试选择较小的图片'));
                         } else {
-                            resolve(blob);
+                            // resolve(blob);
+                            const reader = new FileReader();
+                            reader.onload = () => resolve(reader.result); // 返回 Data URL
+                            reader.onerror = reject;
+                            reader.readAsDataURL(blob);
                         }
                     }, 'image/jpeg', quality);
                 };
@@ -233,20 +239,9 @@
             resultDiv.innerHTML = '';
 
             try {
-               // 获取处理后的blob
-                const processedBlob = await processImage(fileInput.files[0]);
-                
-                // 转换为Base64
-                // const imageBase64 = await convertImageToBase64(processedBlob);
-                // const processedImage = encodeURIComponent(base64Data); // 必须URL编码
-                
-                const imageBase64 = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = reject;
-                    reader.readAsDataURL(processedBlob);
-                });
-                const base64Data = imageBase64.split(',')[1]; // 精确分割去头部
+                // 获取处理后的blob
+                const processedDataUrl = await processImage(fileInput.files[0]);
+                const base64Data = processedDataUrl.split(',')[1]; // 精确分割去头部
 
                 // 构建请求参数
                 const params = new URLSearchParams();
@@ -278,16 +273,6 @@
             }
         }
 
-        // 图片转Base64
-        // function convertImageToBase64(blob) {
-        //     return new Promise((resolve, reject) => {
-        //         const reader = new FileReader();
-        //         reader.onload = () => resolve(reader.result);
-        //         reader.onerror = reject;
-        //         reader.readAsDataURL(blob);
-        //     });
-        // }
-
         // 结果显示
         function showResult(data) {
             const resultDiv = document.getElementById('result');
@@ -299,17 +284,21 @@
 
             let html = '<h3>识别结果：</h3>';
             data.result.forEach(item => {
-                html += `
-                <div class="dish-item">
-                    <p>菜品名称：${item.name} (概率：${(item.probability * 100).toFixed(1)}%)</p>
-                    ${item.baike_info ? `
-                        <div class="baike-info">
-                            <p>${item.baike_info.description || '暂无百科信息'}</p>
-                            ${item.baike_info.image_url ? `<img src="${item.baike_info.image_url}" style="max-width: 200px;">` : ''}
-                        </div>
-                    ` : ''}
-                </div>`;
-            });
+            html += `
+            <div class="dish-item">
+                <p>菜品名称：${item.name} (概率：${(item.probability * 100).toFixed(1)}%)</p>
+                ${item.baike_info ? `
+                    <div class="baike-info">
+                        <p>${item.baike_info.description || '暂无百科信息'}</p>
+                        ${item.baike_info.image_url ? `
+                            <img src="${item.baike_info.image_url.replace(/^http:\/\//i, 'https://')}" 
+                                style="max-width: 200px;"
+                                onerror="this.style.display='none'">
+                        ` : ''}
+                    </div>
+                ` : ''}
+            </div>`;
+        });
 
             resultDiv.innerHTML = html;
         }
