@@ -129,10 +129,8 @@
             
             // 读取图片
             const img = await loadImage(file);
-            
             // 调整尺寸
             const resized = resizeImage(img);
-            
             // 转换格式
             return await convertImage(resized);
             
@@ -188,7 +186,6 @@
         async function convertImage(canvas) {
             return new Promise((resolve, reject) => {
                 let quality = 0.9;
-
 
             // 填充白色背景（关键修复）
             const applyBackgroundAndConvert = () => {
