@@ -1,26 +1,59 @@
 body {
     font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
- /* 为内容区域添加半透明背景 */
- .upload-section, #result {
-    background-color: rgba(255, 255, 255, 0.9); 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩，调节 alpha 值控制暗度 */
+    z-index: -1;
+    pointer-events: none; /* 确保不影响点击事件 */
 }
 
-/* 虚线框，并且使文案居中 */
+#background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* 文案居中 */
 .upload-section {
-    border: 2px dashed #000000;
     padding: 20px;
     text-align: center;
     margin-bottom: 20px;
+}
+
+/* 隐藏 file input 默认的文件名显示 */
+#imageInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+/* 可以自定义一个伪元素作为按钮外观（可选） */
+#imageInput::before {
+    content: '选择文件';
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 12px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
 }
 
 /* 图片预览 */
@@ -31,15 +64,28 @@ body {
 }
 
 #preview img {
-    max-width: 100%;
-    max-height: 400px;
+    max-width: 90vw;       /* 支持更大屏幕 */
+    max-height: 70vh;      /* 控制最大高度，避免超出屏幕 */
+    width: auto;
+    height: auto;
+    object-fit: contain;   /* 完整显示图片，不裁剪 */
 }
 
 /* 识别结果分界线 */
 .dish-item {
     margin-bottom: 15px;
     padding: 10px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #fdfdfd;
+    background-color: rgba(255, 255, 255, 0.8); /* 可选：增加轻微背景色提高可读性 */
+    border-radius: 8px; /* 可选：圆角 */
+}
+
+#result {
+    max-width: 900px; /* 设置最大宽度 */
+    width: 100%;      /* 在小屏幕上自适应 */
+    margin: 0 auto;   /* 居中显示 */
+    padding: 20px;    /* 添加内边距以提升可读性 */
+    box-sizing: border-box;
 }
 
 .result-title {
@@ -58,13 +104,6 @@ body {
     background: #666;
 }
 
-.result-title:before {
-    left: 0;
-}
-
-.result-title:after {
-    right: 0;
- }
 
 /* 开始识别按钮 */
 button {
@@ -98,7 +137,7 @@ button:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50 !important;
+    background-color: rgba(255, 255, 255, 0.4);
     z-index: 1000;
 }
 .ret-login:hover {
@@ -116,5 +155,5 @@ button:hover {
 /* 使文件输入框独占一行 */
 #imageInput {
     display: block;
-    margin: 10px auto;
+    margin: 30px auto;
 }

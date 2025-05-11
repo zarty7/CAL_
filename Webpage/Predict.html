@@ -2,15 +2,25 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>食物卡路里检测系统-图片上传</title>
+    <title>食物卡路里检测系统 - 识别</title>
     <link rel="stylesheet" href="static/css/Predict_styles.css">
 </head>
 <body>
+    <!-- 背景视频 -->
+    <video id="background-video" autoplay muted loop>
+        <source src="static/css/background.mp4" type="video/mp4"> 
+    </video>
+    <div id="overlay"></div>
+
     <button class="ret-login" onclick="handleLogin()">返回主页</button>
 
     <div class="upload-section">
-        <h2>上传菜品图片</h2>
-        <input type="file" id="imageInput" accept="image/*">
+        <h2 style="color: white;">上传菜品图片</h2>
+
+        <div id="uploadContainer">
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+
         <div class="info-text">图片将自动转换为JPG格式</div>
         <div id="preview">
             <img id="previewImage" alt="图片预览">
