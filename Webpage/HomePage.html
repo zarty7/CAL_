@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>主页 - 食物卡路里检测系统</title>
+    <link rel="stylesheet" href="static/css/HomePage_styles.css">
+</head>
+<body>
+    <!-- 背景视频 -->
+    <video id="background-video" autoplay muted loop>
+        <source src="static/css/background.mp4" type="video/mp4"> 
+    </video>
+    <div id="overlay"></div>
+
+    <div class="login-container">
+        <h2 class="login-title">食物卡路里检测系统</h2>
+        <h5>你想管控饮食吗？</h5>
+        <h5>你好奇每顿饭多少卡路里吗？</h5>
+        <h5>你想更健康的生活吗？</h5>
+        
+        <div class="form-group">
+            <button class="login-btn" onclick="handleLogin()">--- 点击前往 ---</button>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin() {
+            window.location.href = 'Predict.html'; // 修改为你的实际页面路径
+        }
+    </script>
+</body>
+</html>

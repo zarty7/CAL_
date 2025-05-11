@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* 黑色半透明遮罩，调节 alpha 值控制暗度 */
+    z-index: -1;
+    pointer-events: none; /* 确保不影响点击事件 */
+}
+
+#background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    overflow: hidden;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0);
+    padding: 40px;
+    border-radius: 12px;
+    width: 100dvw;
+    max-width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container h2,
+.login-container h5 {
+    color: #ffffff;
+    margin: 10px 0;
+    white-space: nowrap; /* 关键：禁止换行 */
+    text-align: center;
+}
+
+.login-title {
+    font-size: 60px;
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #6e2bff, #4CAF50);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 20px;
+    width: 100%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: 20px;
+}
+
+.error-message {
+    color: #ff4444;
+    margin-top: 10px;
+    display: none;
+}
