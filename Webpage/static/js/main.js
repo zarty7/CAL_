@@ -49,3 +49,7 @@
             loading.style.display = 'none';
         }
     }
+
+    document.getElementById('customUploadBtn').addEventListener('click', function () {
+    document.getElementById('imageInput').click();
+});

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>食物卡路里检测系统 - 主页</title>
+    <title>DeepDiet - HomePage</title>
     <link rel="stylesheet" href="static/css/HomePage_styles.css">
 </head>
 <body>
@@ -13,12 +13,12 @@
     <div id="overlay"></div>
 
     <div class="top-right-buttons">
-        <button class="profile-btn">个人主页</button>
+        <button class="profile-btn" onclick="handleLogin_Identify">个人主页</button>
         <button class="feedback-btn">反馈</button>
     </div>
 
     <div class="login-container">
-        <h2 class="login-title">瘦身精灵：菜品卡路里追踪系统</h2>
+        <h2 class="login-title">DeepDiet</h2>
     </div>    
 
     <div class="login-container">
@@ -27,13 +27,16 @@
         <h3>你想更健康的生活吗？</h3>
         
         <div class="form-group">
-            <button class="login-btn" onclick="handleLogin()">点击登录</button>
+            <button class="login-btn" onclick="handleLogin_Identify()">点击登录</button>
         </div>
     </div>
 
     <script>
-        function handleLogin() {
-            window.location.href = 'Predict.html'; // 修改为你的实际页面路径
+        function handleLogin_Identify() {
+            window.location.href = 'Identify.html'; // 修改为你的实际页面路径
+        }
+        function handleLogin_History() {
+            window.location.href = 'History.html'; // 修改为你的实际页面路径
         }
     </script>
 </body>

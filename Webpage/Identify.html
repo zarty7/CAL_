@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>食物卡路里检测系统 - 识别</title>
-    <link rel="stylesheet" href="static/css/Predict_styles.css">
+    <title>DeepDiet - Identify</title>
+    <link rel="stylesheet" href="static/css/Identify_styles.css">
 </head>
 <body>
     <!-- 背景视频 -->
@@ -18,12 +18,13 @@
         <h2 style="color: white;">上传菜品图片</h2>
 
         <div id="uploadContainer">
-            <input type="file" id="imageInput" accept="image/*">
-        </div>
+            <button id="customUploadBtn">选择文件</button>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    </div>
 
-        <div class="info-text">图片将自动转换为JPG格式</div>
+        <div class="info-text" style="color: aliceblue;">图片将自动转换为JPG格式</div>
         <div id="preview">
-            <img id="previewImage" alt="图片预览">
+            <img id="previewImage"  >
         </div>
         <div class="loading" id="loading">识别中...</div>
         <button onclick="analyzeImage()">开始识别</button>

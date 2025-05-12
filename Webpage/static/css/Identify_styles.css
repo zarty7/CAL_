@@ -56,19 +56,25 @@ body {
     font-size: 14px;
 }
 
-/* 图片预览 */
+/* 图片预览容器：限制最大尺寸和居中 */
 #preview {
-    max-width: 500px;
+    max-width: 500px;        /* 最大宽度 */
+    max-height: 400px;       /* 最大高度 */
+    overflow: hidden;        /* 防止图片超出容器 */
+    display: flex;
+    align-items: center;     /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
     margin: 20px auto;
-    display: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 可选：阴影美化 */
 }
 
+/* 图片实际样式：按比例缩放，不裁剪 */
 #preview img {
-    max-width: 90vw;       /* 支持更大屏幕 */
-    max-height: 70vh;      /* 控制最大高度，避免超出屏幕 */
+    max-width: 100%;         /* 宽度不超过容器 */
+    max-height: 100%;        /* 高度不超过容器 */
     width: auto;
     height: auto;
-    object-fit: contain;   /* 完整显示图片，不裁剪 */
+    object-fit: contain;     /* 保持完整显示，不裁剪 */
 }
 
 /* 识别结果分界线 */
@@ -92,22 +98,12 @@ body {
     text-align: center;
     position: relative;
     margin: 40px 0;
+    color: #ffffff;
 }
-
-.result-title:before,
-.result-title:after {   
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: #666;
-}
-
 
 /* 开始识别按钮 */
 button {
-    background-color: #4CAF50;
+    background-color: rgba(255, 255, 255, 0.4);
     color: white;
     padding: 10px 20px;
     border: none;
@@ -118,7 +114,7 @@ button {
 
 /* 鼠标悬停在开始识别时变色 */
 button:hover {
-    background-color: #6e2bff;
+    background-color: #a4b811;
 }
 
 /* 加载文字（实际好像没看见） */
@@ -127,21 +123,31 @@ button:hover {
     margin: 20px;
     color: #666;
 }
+
 .info-text {
     color: #666;
     font-size: 0.9em;
     margin: 10px 0;
 }
+
 /* 新增返回按钮样式 */
 .ret-login {
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: fixed;             /* 固定定位 */
+    top: 20px;                   /* 距离顶部 20px */
+    right: 20px;                 /* 距离右侧 20px */
     background-color: rgba(255, 255, 255, 0.4);
-    z-index: 1000;
+    z-index: 1000;               /* 必须足够高，确保在其他元素之上 */
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+/* 鼠标悬停效果保持不变 */
 .ret-login:hover {
-    background-color: #6e2bff;
+    background-color: #a4b811;
 }
 
 /* 调整文件上传区域布局 */
