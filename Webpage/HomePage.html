@@ -2,13 +2,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepDiet - HomePage</title>
     <link rel="stylesheet" href="static/css/HomePage_styles.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <!-- 背景视频 -->
     <video id="background-video" autoplay muted loop>
-        <source src="static/css/background.mp4" type="video/mp4"> 
+        <source src="static/image/background.mp4" type="video/mp4"> 
     </video>
     <div id="overlay"></div>
 
@@ -31,6 +33,7 @@
         </div>
     </div>
 
+    <script src="static/js/sevice_worker.js"></script>
     <script>
         function handleLogin_Identify() {
             window.location.href = 'Identify.html'; // 修改为你的实际页面路径

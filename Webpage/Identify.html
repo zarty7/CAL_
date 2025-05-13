@@ -2,13 +2,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeepDiet - Identify</title>
     <link rel="stylesheet" href="static/css/Identify_styles.css">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <!-- 背景视频 -->
     <video id="background-video" autoplay muted loop>
-        <source src="static/css/background.mp4" type="video/mp4"> 
+        <source src="static/image/background.mp4" type="video/mp4"> 
     </video>
     <div id="overlay"></div>
 
@@ -21,7 +23,6 @@
             <button id="customUploadBtn">选择文件</button>
             <input type="file" id="imageInput" accept="image/*" style="display: none;">
     </div>
-
         <div class="info-text" style="color: aliceblue;">图片将自动转换为JPG格式</div>
         <div id="preview">
             <img id="previewImage"  >
@@ -35,6 +36,7 @@
     <script src="static/js/imageProcessor.js"></script>
     <script src="static/js/main.js"></script>
     <script src="static/js/show.js"></script>
+    <script src="static/js/sevice_worker.js"></script>
 
 </body>
 </html>

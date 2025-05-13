@@ -31,6 +31,11 @@
 
 ## 二、核心技术实现
   **1. 图片处理技术**
+  
+- Canvas：用于图片处理和绘制
+- File API：用于文件读取和处理
+- URL.createObjectURL：用于生成图片预览链接
+
 ```javascript
 // 使用Canvas API进行图片处理
 function convertImage(canvas) {
@@ -46,9 +51,7 @@ function convertImage(canvas) {
   }
 }
 ```
-- Canvas：用于图片处理和绘制
-- File API：用于文件读取和处理
-- URL.createObjectURL：用于生成图片预览链接
+
 
   **2. 图片上传与预览**
 ```javascript
@@ -72,6 +75,9 @@ fileInput.addEventListener('change', function() {
 ```
 
   **3. 网络请求技术**
+  
+- Fetch API：用于网络请求
+- async/await：异步编程模型
 ```javascript
 // 使用Fetch API调用百度AI接口
 const response = await fetch(API_URL, {
@@ -82,8 +88,7 @@ const response = await fetch(API_URL, {
     body: params
 });
 ```
-- Fetch API：用于网络请求
-- async/await：异步编程模型
+
   **4. 数据可视化**
 ```javascript
 // 结果展示函数
@@ -210,6 +215,7 @@ function handleLogin() {
 - 图片处理与业务逻辑分离
 - 可配置参数集中管理
 - 样式与脚本分离
+
 **2. 扩展点**
 - 卡路里计算模块
 - 多API备用方案
@@ -221,18 +227,22 @@ function handleLogin() {
 **1. 安全增强**
 - AccessToken动态获取
 - 文件类型白名单验证
+
 **2. 性能优化**
 - Web Worker处理图片
 - 本地缓存机制
 - 请求结果缓存
+
 **3. 体验提升**
 - 拖放文件支持
 - 上传进度指示
 - 移动端适配优化
+
 该方案实现了从图片上传到营养分析的全流程处理，核心优势在于：
 
 - 智能图片处理流水线
 - 完善的错误处理机制
 - 可扩展的架构设计
 - 良好的用户体验细节
+
 后续可结合营养数据库扩展卡路里计算功能，打造完整的饮食健康分析系统。
